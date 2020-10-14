@@ -127,6 +127,12 @@ public class Test {
         } while (choice != 0);
     }
 
+    /**
+     * phương thức dùng để tạo đối tượng giảng viên
+     *
+     * @param input đối tượng nhập liệu từ bàn phím
+     * @return giảng viên với các thông tin đã tạo
+     */
     private static Instructor createInstructor(Scanner input) {
         out.println("Mã giảng viên: ");
         var instructorId = input.nextLine();
@@ -139,6 +145,11 @@ public class Test {
         return new Instructor(instructorId, fullName, salary, exp);
     }
 
+    /**
+     * hiển thị danh sách giảng viên ra màn hình
+     *
+     * @param instructors danh sách giảng viên cần hiển thị
+     */
     private static void showInstructors(ArrayList<Instructor> instructors) {
         out.printf("%-25s%-25s%-15s%-15s\n", "Mã giảng viên",
                 "Tên giảng viên", "Mức lương", "Kinh nghiệm");
@@ -149,6 +160,11 @@ public class Test {
         }
     }
 
+    /**
+     * hiển thị danh sách sinh viên ra màn hình
+     *
+     * @param students danh sách sinh viên cần hiển thị
+     */
     private static void showStudents(ArrayList<Student> students) {
         out.printf("%-25s%-25s%-25s%-15s\n", "Mã sinh viên",
                 "Tên sinh viên", "Chuyên ngành", "Điểm TB");
@@ -159,6 +175,13 @@ public class Test {
         }
     }
 
+    /**
+     * phương thức dùng để tạo đối tượng sinh viên với các thông tin
+     * đơn giản
+     *
+     * @param input đối tượng nhập liệu
+     * @return đối tượng sinh viên với các thông tin đã tạo
+     */
     private static Student createStudent(Scanner input) {
         out.println("Mã sinh viên: ");
         var id = input.nextLine();
@@ -171,6 +194,11 @@ public class Test {
         return new Student(id, fullName, major, avgGrade);
     }
 
+    /**
+     * phương thức hiển thị thông điệp nào đó
+     *
+     * @param msg thông điệp cần hiển thị
+     */
     private static void showMessage(String msg) {
         out.println("==> " + msg + " <==");
     }
