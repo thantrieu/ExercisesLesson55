@@ -8,6 +8,6 @@ import java.util.Comparator;
 public class SortInstructorByNameASC implements Comparator<Instructor> {
     @Override
     public int compare(Instructor o1, Instructor o2) {
-        return o1.getFullName().compareTo(o2.getFullName());
+        return o2.getFirstName().compareTo(o1.getFirstName());
     }
 }

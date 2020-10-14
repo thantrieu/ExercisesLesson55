@@ -98,7 +98,7 @@ public class Test {
     }
 
     private static Vehicle createVehicle(Scanner input) {
-        out.println("Chọn loài: \n1. Ô tô.\n2. Xe máy.");
+        out.println("Chọn tạo: \n1. Ô tô.\n2. Xe máy.");
         var option = Integer.parseInt(input.nextLine());
 
         out.println("Hãng: ");

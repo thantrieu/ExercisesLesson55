@@ -14,6 +14,13 @@ public class Instructor extends Person {
     public Instructor() {
     }
 
+    public Instructor(String instructorId, String fullName, float salary, float experience) {
+        setFullName(fullName);
+        this.instructorId = instructorId;
+        this.salary = salary;
+        this.experience = experience;
+    }
+
     public Instructor(String id, String fullName, String address,
                       Date dateOfBirth, String email, String phoneNumber,
                       String instructorId, String expertise, float salary,

@@ -9,6 +9,6 @@ public class SortStudentByNameASC implements Comparator<Student> {
 
     @Override
     public int compare(Student o1, Student o2) {
-        return o1.getFullName().compareTo(o2.getFullName());
+        return o1.getFirstName().compareTo(o2.getFirstName());
     }
 }

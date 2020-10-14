@@ -40,8 +40,13 @@ public abstract class Person implements Comparable<Person> {
         this.id = id;
     }
 
+    // thêm vào để so sánh với Comparator cho dễ dùng
+    public final String getFirstName() {
+        return fullName.first;
+    }
+
     public final String getFullName() {
-        return fullName.first + " " + fullName.mid + fullName.last;
+        return fullName.last + " " + fullName.mid + fullName.first;
     }
 
     public final void setFullName(String fullName) {

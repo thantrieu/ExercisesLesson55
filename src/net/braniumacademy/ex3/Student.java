@@ -15,6 +15,14 @@ public class Student extends Person {
     public Student() {
     }
 
+    public Student(String studentId, String fullName,
+                   String major, float avgGrade) {
+        setFullName(fullName);
+        this.studentId = studentId;
+        this.major = major;
+        this.avgGrade = avgGrade;
+    }
+
     public Student(String studentId, String schoolName,
                    String className, String major, float avgGrade) {
         this.studentId = studentId;

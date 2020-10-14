@@ -1,121 +1,178 @@
 package net.braniumacademy.ex3;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import net.braniumacademy.ex3.comparator.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+import static java.lang.System.out;
 
 public class Test {
-    public static void main(String[] args) throws ParseException {
-        var format = "dd/MM/yyyy"; // date format
-        var dateFormat = new SimpleDateFormat(format);
-        // ERROR!
-//        Person person = new Person("09167875426", "Tony Stark",
-//                "107 Malibu", dateFormat.parse("27/10/2005"),
-//                "ironman@xmail.com", "0123456789");
+    public static void main(String[] args) {
+        var i1 = new Instructor("INS1002", "Tony Stark", 99000, 6);
+        var i2 = new Instructor("INS1001", "Tony Juice", 14000, 3.5f);
+        var i3 = new Instructor("INS1005", "Pence Mary", 19000, 5.5f);
+        var i4 = new Instructor("INS1009", "Lee Dong", 9000, 1.5f);
 
-        Instructor myInstructor = new Instructor("09167875426", "Tony Stark",
-                "107 Malibu", dateFormat.parse("27/10/2005"),
-                "ironman@xmail.com", "0123456789",
-                "INS100265IRON", "Java", 990000, 5.5f);
+        var s1 = new Student("STU100000", "Phan Bá Vành", "CNTT", 6.75f);
+        var s2 = new Student("STU100001", "Lê Văn Thiện", "CNTT", 9.5f);
+        var s3 = new Student("STU100002", "Phùng Thúy Huyền", "CNTT", 6.75f);
+        var s4 = new Student("STU100005", "Đỗ Trọng Anh", "CNTT", 8.5f);
 
-        Student myStudent = new Student("09167875428", "Marri Lane",
-                "Cầu Giấy, Hà Nội", dateFormat.parse("17/11/2006"),
-                "mrlane@xmail.com", "0123456789",
-                "STU100005", "PTIT", "D25CN5", "CNTT", 8.75f);
+        int choice = 0;
+        var input = new Scanner(System.in);
+        var instructors = new ArrayList<Instructor>();
+        instructors.add(i1);
+        instructors.add(i2);
+        instructors.add(i3);
+        instructors.add(i4);
+        var students = new ArrayList<Student>();
+        students.add(s1);
+        students.add(s2);
+        students.add(s3);
+        students.add(s4);
 
-        GraduatedStudent graduatedStudent = new GraduatedStudent("09167875428", "Marri Lane",
-                "Cầu Giấy, Hà Nội", dateFormat.parse("17/11/2006"),
-                "mrlane@xmail.com", "0123456789",
-                "STU100005", "PTIT", "D25CN5",
-                "CNTT", 8.75f, 2022, 18, 4,
-                1500000.25f, "Google Inc", "IT Engineer");
+        do {
+            out.println("===================== MENU =====================");
+            out.println("1. Thêm 1 giảng viên vào danh sách");
+            out.println("2. Thêm 1 sinh viên vào danh sách");
+            out.println("3. Sắp xếp giảng viên theo tên z-a");
+            out.println("4. Sắp xếp giảng viên theo mức lương giảm dần");
+            out.println("5. Sắp xếp giảng viên theo kinh nghiệm giảm dần");
+            out.println("6. Sắp xếp sinh viên theo tên a-z");
+            out.println("7. Sắp xếp sinh viên theo điểm trung bình giảm dần");
+            out.println("8. Hiển thị danh sách giảng viên ra màn hình");
+            out.println("9. Hiển thị danh sách sinh viên ra màn hình");
+            out.println("0. Thoát chương trình");
+            choice = Integer.parseInt(input.nextLine());
+            switch (choice) {
+                case 0:
+                    showMessage("Cảm ơn bạn đã sử dụng dịch vụ!");
+                    break;
+                case 1:
+                    Instructor instructor = createInstructor(input);
+                    instructors.add(instructor);
+                    break;
 
-        // gọi phương thức hiển thị thông tin các đối tượng trên
-//        System.out.println("\n==== THÔNG TIN NGƯỜI ====");
-//        showPerson(person);
-//        person.eat("Cá luộc");
-//        person.relax("Đá banh");
-//        person.sleep();
+                case 2:
+                    Student student = createStudent(input);
+                    students.add(student);
+                    break;
 
-        System.out.println("\n==== THÔNG TIN GIẢNG VIÊN ====");
-        showInstructor(myInstructor);
-        myInstructor.eat("Ngỗng luộc");
-        myInstructor.speak();
-        myInstructor.mark("Java cơ bản");
-        myInstructor.prepareLesson("Lập trình C++");
+                case 3:
+                    if (instructors.size() > 0) {
+                        Collections.sort(instructors,
+                                new SortInstructorByNameASC());
+                        showInstructors(instructors);
+                    } else {
+                        showMessage("Danh giảng viên sách rỗng");
+                    }
+                    break;
+                case 4:
+                    if (instructors.size() > 0) {
+                        Collections.sort(instructors,
+                                new SortInstructorBySalaryDESC());
+                        showInstructors(instructors);
+                    } else {
+                        showMessage("Danh giảng viên sách rỗng");
+                    }
+                    break;
 
-        System.out.println("\n==== THÔNG TIN SINH VIÊN ====");
-        showStudent(myStudent);
-        myStudent.sleep();
-        myStudent.doExam("Java cơ bản");
-        myStudent.speak();
-        myStudent.registerCredit(21);
-
-        System.out.println("\n==== THÔNG TIN SINH VIÊN ĐÃ TỐT NGHIỆP ====");
-        showGraduatedStudent(graduatedStudent);
-        graduatedStudent.sleep();
-        graduatedStudent.visitOldSchool();
-        graduatedStudent.doExam("Toán cao cấp");
-        graduatedStudent.work();
-        graduatedStudent.relax("Chơi bắn bi");
+                case 5:
+                    if (instructors.size() > 0) {
+                        Collections.sort(instructors,
+                                new SortInstructorByExperienceDESC());
+                        showInstructors(instructors);
+                    } else {
+                        showMessage("Danh giảng viên sách rỗng");
+                    }
+                    break;
+                case 6:
+                    if (students.size() > 0) {
+                        Collections.sort(students);
+                        // hoặc:
+                        // Collections.sort(students, new SortStudentByNameASC());
+                        showStudents(students);
+                    } else {
+                        showMessage("Danh sách sinh viên rỗng");
+                    }
+                    break;
+                case 7:
+                    if (students.size() > 0) {
+                        Collections.sort(students, new SortStudentByGradeDESC());
+                        showStudents(students);
+                    } else {
+                        showMessage("Danh sách sinh viên rỗng");
+                    }
+                    break;
+                case 8:
+                    if (instructors.size() > 0) {
+                        showInstructors(instructors);
+                    } else {
+                        showMessage("Danh giảng viên sách rỗng");
+                    }
+                    break;
+                case 9:
+                    if (students.size() > 0) {
+                        showStudents(students);
+                    } else {
+                        showMessage("Danh sách sinh viên rỗng");
+                    }
+                    break;
+                default:
+                    showMessage("Sai chức năng, vui lòng chọn lại!");
+                    break;
+            }
+        } while (choice != 0);
     }
 
-    /**
-     * phương thức hiển thị thông tin sinh viên đã tốt nghiệp
-     *
-     * @param graduatedStudent
-     */
-    private static void showGraduatedStudent(GraduatedStudent graduatedStudent) {
-        showStudent(graduatedStudent);
-        System.out.println("Năm tốt nghiệp: " + graduatedStudent.getGraduatedYear());
-        System.out.println("Số môn đã trượt: " + graduatedStudent.getFailed());
-        System.out.println("Số tín chỉ học lại: " + graduatedStudent.getCreditRetake());
-        System.out.println("Tên công ty: " + graduatedStudent.getCompayName());
-        System.out.println("Lương khởi điểm: " + graduatedStudent.getStartingSalary());
-        System.out.println("Chức vụ: " + graduatedStudent.getRole());
+    private static Instructor createInstructor(Scanner input) {
+        out.println("Mã giảng viên: ");
+        var instructorId = input.nextLine();
+        out.println("Tên giảng viên: ");
+        var fullName = input.nextLine();
+        out.println("Mức lương: ");
+        var salary = Float.parseFloat(input.nextLine());
+        out.println("Kinh nghiệm: ");
+        var exp = Float.parseFloat(input.nextLine());
+        return new Instructor(instructorId, fullName, salary, exp);
     }
 
-    /**
-     * phương thức hiển thị thông tin sinh viên
-     *
-     * @param student
-     */
-    private static void showStudent(Student student) {
-        showPerson(student);
-        System.out.println("Mã SV: " + student.getStudentId());
-        System.out.println("Trường: " + student.getSchoolName());
-        System.out.println("Lớp: " + student.getClassName());
-        System.out.println("Chuyên ngành: " + student.getMajor());
-        System.out.println("Điểm TB: " + student.getAvgGrade());
+    private static void showInstructors(ArrayList<Instructor> instructors) {
+        out.printf("%-25s%-25s%-15s%-15s\n", "Mã giảng viên",
+                "Tên giảng viên", "Mức lương", "Kinh nghiệm");
+        for (var instructor : instructors) {
+            out.printf("%-25s%-25s%-15.2f%-15.2f\n",
+                    instructor.getInstructorId(), instructor.getFullName(),
+                    instructor.getSalary(), instructor.getExperience());
+        }
     }
 
-    /**
-     * phương thức hiển thị thông tin giảng viên
-     *
-     * @param instructor
-     */
-    private static void showInstructor(Instructor instructor) {
-        showPerson(instructor);
-        System.out.println("Mã GV: " + instructor.getInstructorId());
-        System.out.println("Chuyên môn: " + instructor.getExpertise());
-        System.out.println("Mức lương: " + instructor.getSalary());
-        System.out.println("Số năm kinh nghiệm: " + instructor.getExperience());
+    private static void showStudents(ArrayList<Student> students) {
+        out.printf("%-25s%-25s%-25s%-15s\n", "Mã sinh viên",
+                "Tên sinh viên", "Chuyên ngành", "Điểm TB");
+        for (var student : students) {
+            out.printf("%-25s%-25s%-25s%-15.2f\n",
+                    student.getStudentId(), student.getFullName(),
+                    student.getMajor(), student.getAvgGrade());
+        }
     }
 
-    /**
-     * phương thức hiển thị thông tin về người
-     *
-     * @param person
-     */
-    private static void showPerson(Person person) {
-        var format = "dd/MM/yyyy"; // date format
-        var dateFormat = new SimpleDateFormat(format);
-        System.out.println("Số CMT/Căn cước: " + person.getId());
-        System.out.println("Họ và tên: " + person.getFullName());
-        System.out.println("Địa chỉ: " + person.getAddress());
-        System.out.println("Email: " + person.getEmail());
-        System.out.println("SĐT: " + person.getPhoneNumber());
-        System.out.println("Ngày sinh: "
-                + dateFormat.format(person.getDateOfBirth()));
+    private static Student createStudent(Scanner input) {
+        out.println("Mã sinh viên: ");
+        var id = input.nextLine();
+        out.println("Họ tên sinh viên: ");
+        var fullName = input.nextLine();
+        out.println("Chuyên ngành: ");
+        var major = input.nextLine();
+        out.println("Điểm trung bình: ");
+        var avgGrade = Float.parseFloat(input.nextLine());
+        return new Student(id, fullName, major, avgGrade);
+    }
+
+    private static void showMessage(String msg) {
+        out.println("==> " + msg + " <==");
     }
 
 }
