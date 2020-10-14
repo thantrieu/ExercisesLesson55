@@ -1,14 +1,13 @@
 package net.braniumacademy.ex5;
 
+import net.braniumacademy.ex5.comparator.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 
 import static java.lang.System.in;
 import static java.lang.System.out;
@@ -31,9 +30,10 @@ public class Test {
             out.println("6. Xóa nhân viên theo mã cho trước");
             out.println("7. Tính lương nhân viên");
             out.println("8. Tính thưởng nhân viên");
-            out.println("9. Hiển thị mức thưởng và cách nhận thưởng");
-            out.println("10. Hiển thị bảng lương");
-            out.println("11. Lưu danh sách nhân viên, giám đốc");
+            out.println("9. Sắp xếp danh sách nhân viên");
+            out.println("10. Hiển thị mức thưởng và cách nhận thưởng");
+            out.println("11. Hiển thị bảng lương");
+            out.println("12. Lưu danh sách nhân viên, giám đốc");
             out.println("0. Thoát chương trình");
             out.println("Xin mời bạn chọn: ");
             choice = Integer.parseInt(input.nextLine()); // đọc vào lựa chọn
@@ -147,19 +147,38 @@ public class Test {
                     break;
                 case 9:
                     if (employees.size() > 0) {
-                        showBonus(employees);
+                        out.println("Chọn tiêu chí sắp xếp: ");
+                        out.println("1. Tên tăng dần a-z");
+                        out.println("2. Tên giảm dần z-a");
+                        out.println("3. Mức lương tăng dần");
+                        out.println("4. Mức lương giảm dần");
+                        out.println("5. Số năm kinh nghiệm tăng dần");
+                        out.println("6. Số năm kinh nghiệm giảm dần");
+                        out.println("7. Từ trẻ đến già");
+                        out.println("8. Từ già đến trẻ");
+                        out.println("9. Tổng lương thực lĩnh giảm dần");
+                        var option = Integer.parseInt(input.nextLine());
+                        sortEmployees(employees, option);
+                        showEmployees(employees);
                     } else {
                         showMessage("Danh sách nhân viên rỗng");
                     }
                     break;
                 case 10:
                     if (employees.size() > 0) {
-                        showPayroll(employees);
+                        showBonus(employees);
                     } else {
                         showMessage("Danh sách nhân viên rỗng");
                     }
                     break;
                 case 11:
+                    if (employees.size() > 0) {
+                        showPayroll(employees);
+                    } else {
+                        showMessage("Danh sách nhân viên rỗng");
+                    }
+                    break;
+                case 12:
                     if (employees.size() > 0) {
                         var isSuccess = writeEmpToFile(employees, empFileName);
                         if (isSuccess) {
@@ -178,6 +197,49 @@ public class Test {
         } while (choice != 0);
     }
 
+    /**
+     * phương thức sắp xếp danh sách nhân viên theo tiêu chí định trước
+     *
+     * @param employees danh sách nhân viên
+     * @param option    tùy chọn sắp xếp
+     */
+    private static void sortEmployees(ArrayList<Employee> employees, int option) {
+        switch (option) {
+            case 1:
+                Collections.sort(employees, new SortByNameASC());
+                break;
+            case 2:
+                Collections.sort(employees, new SortByNameDESC());
+                break;
+            case 3:
+                Collections.sort(employees, new SortBySalaryASC());
+                break;
+            case 4:
+                Collections.sort(employees, new SortBySalaryDESC());
+                break;
+            case 5:
+                Collections.sort(employees, new SortByExperienceASC());
+                break;
+            case 6:
+                Collections.sort(employees, new SortByExperienceDESC());
+                break;
+            case 7:
+                Collections.sort(employees, new SortByAgeASC());
+                break;
+            case 8:
+                Collections.sort(employees, new SortByAgeDESC());
+                break;
+            case 9:
+                Collections.sort(employees, new SortByTotalSalaryDESC());
+                break;
+        }
+    }
+
+    /**
+     * phương thức hiển thị bảng lương của nhân viên
+     *
+     * @param employees danh sách nhân viên
+     */
     private static void showPayroll(ArrayList<Employee> employees) {
         out.printf("%-15s%-25s%-15s%-15s%-15s%-20s\n", "Mã NV", "Tên NV",
                 "Mức lương", "Số ngày làm", "Thưởng", "Tổng lương");
@@ -188,6 +250,11 @@ public class Test {
         }
     }
 
+    /**
+     * phương thức hiển thị mức thưởng và cách nhận thưởng
+     *
+     * @param employees danh sách nhân viên
+     */
     private static void showBonus(ArrayList<Employee> employees) {
         out.printf("%-15s%-25s%-15s%-25s\n", "Mã NV",
                 "Tên NV", "Bonus", "Hình thức nhận");
@@ -197,6 +264,11 @@ public class Test {
         }
     }
 
+    /**
+     * phương thức tính thưởng cho nhân viên
+     *
+     * @param employees danh sách nhân viên
+     */
     private static void calculBonus(ArrayList<Employee> employees) {
         for (int i = 0; i < employees.size(); i++) {
             var emp = employees.get(i);
@@ -204,6 +276,11 @@ public class Test {
         }
     }
 
+    /**
+     * phương thức tính lương cho nhân viên
+     *
+     * @param employees danh sách nhân viên
+     */
     private static void calculSalary(ArrayList<Employee> employees) {
         for (int i = 0; i < employees.size(); i++) {
             var emp = employees.get(i);
