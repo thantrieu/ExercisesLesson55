@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * lớp mô tả thông tin người
  */
-public abstract class Person {
+public abstract class Person implements Comparable<Person> {
     private String id; // số chứng minh thư/căn cước
     private FullName fullName; // họ tên đầy đủ
     private String address; // địa chỉ
@@ -24,6 +24,12 @@ public abstract class Person {
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+    // sắp xếp theo tên tăng dần a -> z
+    @Override
+    public int compareTo(Person other) {
+        return fullName.getFirst().compareTo(other.fullName.getFirst());
     }
 
     public final String getId() {

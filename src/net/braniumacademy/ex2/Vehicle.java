@@ -3,7 +3,7 @@ package net.braniumacademy.ex2;
 /**
  * Lớp mô tả phương tiện giao thông
  */
-public abstract class Vehicle {
+public abstract class Vehicle implements Comparable<Vehicle> {
     private String brand;   // hãng
     private int year;       // năm sản xuất
     private String madeIn;  // nơi sản xuất
@@ -25,6 +25,12 @@ public abstract class Vehicle {
         this.size = size;
         this.weight = weight;
         this.lisensePlate = lisensePlate;
+    }
+
+    // phương thức sắp xếp theo tên hãng a-z
+    @Override
+    public int compareTo(Vehicle other) {
+        return brand.compareTo(other.brand);
     }
 
     public final String getBrand() {
