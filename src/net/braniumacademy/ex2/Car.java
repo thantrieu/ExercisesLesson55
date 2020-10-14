@@ -10,6 +10,10 @@ public class Car extends Automobile {
     public Car() {
     }
 
+    public Car(String brand, int year, float price, float weight) {
+        super(brand, year, price, weight);
+    }
+
     public Car(int numOfDoor, int numOfSeat, String category,
                String driveForm, String typeOfEnergy) {
         this.numOfDoor = numOfDoor;

@@ -15,6 +15,13 @@ public abstract class Vehicle implements Comparable<Vehicle> {
     public Vehicle() {
     }
 
+    public Vehicle(String brand, int year, float price, float weight) {
+        this.brand = brand;
+        this.year = year;
+        this.price = price;
+        this.weight = weight;
+    }
+
     public Vehicle(String brand, int year, String madeIn,
                    float price, String size, float weight,
                    String lisensePlate) {

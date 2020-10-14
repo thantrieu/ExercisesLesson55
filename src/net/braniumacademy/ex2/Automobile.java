@@ -10,6 +10,10 @@ public class Automobile extends Vehicle { // xe ô tô nói chung
     public Automobile() {
     }
 
+    public Automobile(String brand, int year, float price, float weight) {
+        super(brand, year, price, weight);
+    }
+
     public Automobile(int numOfWheel, String engineType,
                       String name, String color, Owner owner) {
         this.numOfWheel = numOfWheel;

@@ -122,7 +122,7 @@ public abstract class Person implements Comparable<Person> {
         this.phoneNumber = phoneNumber;
     }
 
-    class FullName {
+    public class FullName {
         private String first;
         private String last;
         private String mid;

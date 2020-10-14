@@ -10,6 +10,10 @@ public class Electricbike extends Vehicle {
     public Electricbike() {
     }
 
+    public Electricbike(String brand, int year, float price, float weight) {
+        super(brand, year, price, weight);
+    }
+
     public Electricbike(String color, float voltage, float kmPerCharge,
                         float chargingTime, float chargingVoltage) {
         this.color = color;

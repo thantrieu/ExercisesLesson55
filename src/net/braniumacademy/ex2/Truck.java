@@ -8,6 +8,10 @@ public class Truck extends Automobile {
     public Truck() {
     }
 
+    public Truck(String brand, int year, float price, float weight) {
+        super(brand, year, price, weight);
+    }
+
     public Truck(float payload, String purpose, float shippedAmount) {
         this.payload = payload;
         this.purpose = purpose;

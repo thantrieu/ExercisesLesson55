@@ -10,6 +10,10 @@ public class Bus extends Automobile {
     public Bus() {
     }
 
+    public Bus(String brand, int year, float price, float weight) {
+        super(brand, year, price, weight);
+    }
+
     public Bus(int numOfSeats, float maxPayload, float orbit,
                float fuelTankCapacity, int numOfPT) {
         this.numOfSeats = numOfSeats;

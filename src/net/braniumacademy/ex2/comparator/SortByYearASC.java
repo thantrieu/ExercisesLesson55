@@ -8,6 +8,6 @@ import java.util.Comparator;
 public class SortByYearASC implements Comparator<Vehicle> {
     @Override
     public int compare(Vehicle o1, Vehicle o2) {
-        return o1.getYear() - o2.getYear();
+        return o2.getYear() - o1.getYear();
     }
 }

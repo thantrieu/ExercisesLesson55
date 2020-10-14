@@ -12,6 +12,10 @@ public class Motobike extends Vehicle {
     public Motobike() {
     }
 
+    public Motobike(String brand, int year, float price, float weight) {
+        super(brand, year, price, weight);
+    }
+
     public Motobike(int numOfWheel) {
         this.numOfWheel = numOfWheel;
     }
