@@ -15,7 +15,7 @@ import static java.lang.System.out;
 public class Test {
     public static void main(String[] args) {
         String empFileName = "EMP.DAT";
-        int choice = 0;
+        int choice;
         ArrayList<Employee> employees
                 = new ArrayList<>(readEmpFromFile(empFileName));
         updateEmployeeId(employees);
@@ -205,33 +205,15 @@ public class Test {
      */
     private static void sortEmployees(ArrayList<Employee> employees, int option) {
         switch (option) {
-            case 1:
-                Collections.sort(employees, new SortByNameASC());
-                break;
-            case 2:
-                Collections.sort(employees, new SortByNameDESC());
-                break;
-            case 3:
-                Collections.sort(employees, new SortBySalaryASC());
-                break;
-            case 4:
-                Collections.sort(employees, new SortBySalaryDESC());
-                break;
-            case 5:
-                Collections.sort(employees, new SortByExperienceASC());
-                break;
-            case 6:
-                Collections.sort(employees, new SortByExperienceDESC());
-                break;
-            case 7:
-                Collections.sort(employees, new SortByAgeASC());
-                break;
-            case 8:
-                Collections.sort(employees, new SortByAgeDESC());
-                break;
-            case 9:
-                Collections.sort(employees, new SortByTotalSalaryDESC());
-                break;
+            case 1 -> employees.sort(new SortByNameASC());
+            case 2 -> employees.sort(new SortByNameDESC());
+            case 3 -> employees.sort(new SortBySalaryASC());
+            case 4 -> employees.sort(new SortBySalaryDESC());
+            case 5 -> employees.sort(new SortByExperienceASC());
+            case 6 -> employees.sort(new SortByExperienceDESC());
+            case 7 -> employees.sort(new SortByAgeASC());
+            case 8 -> employees.sort(new SortByAgeDESC());
+            case 9 -> employees.sort(new SortByTotalSalaryDESC());
         }
     }
 
@@ -270,8 +252,7 @@ public class Test {
      * @param employees danh sách nhân viên
      */
     private static void calculBonus(ArrayList<Employee> employees) {
-        for (int i = 0; i < employees.size(); i++) {
-            var emp = employees.get(i);
+        for (Employee emp : employees) {
             emp.calculBonus();
         }
     }
@@ -282,8 +263,7 @@ public class Test {
      * @param employees danh sách nhân viên
      */
     private static void calculSalary(ArrayList<Employee> employees) {
-        for (int i = 0; i < employees.size(); i++) {
-            var emp = employees.get(i);
+        for (Employee emp : employees) {
             emp.calculTotalSalary();
         }
     }
@@ -461,8 +441,8 @@ public class Test {
         var workingDay = Float.parseFloat(data[10]);
         var totalSalary = Float.parseFloat(data[11]);
         var bonus = Float.parseFloat(data[12]);
-        Date start = null;
-        Date end = null;
+        Date start;
+        Date end;
         if (data.length > 13) {
             try {
                 start = dateFormat.parse(data[13]);
@@ -639,7 +619,7 @@ public class Test {
         out.println("Ngày sinh dd/MM/yyyy, ví dụ 12/10/2020: ");
         var format = "dd/MM/yyyy";
         SimpleDateFormat dateFormat = new SimpleDateFormat(format);
-        Date dob = null;
+        Date dob;
         try {
             dob = dateFormat.parse(input.nextLine());
         } catch (ParseException e) {
